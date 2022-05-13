@@ -7,7 +7,7 @@
     <style>
     body {
        background-color: #f6c2c2;
-       cursor: url(yubi.png) 50 10, auto;
+       cursor: pointer;
        font-family: 'M PLUS 1p', sans-serif;
     }
      #container {
@@ -136,6 +136,9 @@
       <div id="skip" class="buttons" onclick="skip()">つぎ→</div>
     </div>
     <script>
+      const okSound = new Audio('ok.mp3');
+      const ngSound = new Audio('ng.mp3');
+
       function writeNum(num) {
       	const answer = document.getElementById("answerText");
         if (answer.innerText.length < 2) {
@@ -149,10 +152,12 @@
       	if (answer === seikai) {
       	  document.getElementById("hamanaru").style.display = "flex";
       	  document.getElementById("hamanaru").src = `./hanamaru${Math.floor(Math.random() * 2) + 1}.gif`;
+      	  okSound.play();
       	} else {
       	  const prefix = Math.abs(answer - seikai) === 1 ? 'おしい！' : 'ざんねん！';
       	  document.getElementById("resultMessage").innerText = prefix + `せいかいは ${seikai} だよ！`;
       	  document.getElementById("resultMessage").style.display = "inline-block";
+      	  ngSound.play();
       	}
       }
       function retry() {

@@ -1,6 +1,6 @@
 "use strict";
 
-(function() {
+(function () {
   // 解答時の効果音
   const okSound = new Audio("./sounds/ok.mp3");
   const ngSound = new Audio("./sounds/ng.mp3");
@@ -16,21 +16,17 @@
   // 解答する
   function finish() {
     const answer = document.getElementById("answerText").innerText * 1;
-    const seikai =
-      document.getElementById("shiki").getAttribute("value") * 1;
+    const seikai = document.getElementById("shiki").getAttribute("value") * 1;
     if (answer === seikai) {
       document.getElementById("hamanaru").style.display = "flex";
-      document.getElementById("hamanaru").src = `./images/hanamaru${
-        Math.floor(Math.random() * 2) + 1
-      }.gif`;
+      document.getElementById("hamanaru").src = "./images/hanamaru.gif";
       okSound.play();
     } else {
       const prefix =
         Math.abs(answer - seikai) === 1 ? "おしい！" : "ざんねん！";
       document.getElementById("resultMessage").innerText =
         prefix + `せいかいは ${seikai} だよ！`;
-      document.getElementById("resultMessage").style.display =
-        "inline-block";
+      document.getElementById("resultMessage").style.display = "inline-block";
       ngSound.play();
     }
   }
@@ -80,6 +76,8 @@
   document.getElementById("retry").onclick = retry;
   const numButtons = document.getElementsByClassName("numButtons");
   for (let i = 0; i < numButtons.length; i++) {
-    numButtons[i].onclick = function() { writeNum(numButtons[i].innerText); };
+    numButtons[i].onclick = function () {
+      writeNum(numButtons[i].innerText);
+    };
   }
 })();

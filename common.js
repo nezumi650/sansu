@@ -64,10 +64,10 @@
       // たしざん(かんたん)
       // くりあがりなし、かつ10の位の計算無し
       // = 1の位の合計が9以下、かつ右辺と左辺の合計が19以下
-      let num1 = Math.floor(Math.random() * 9) + 1;
-      const num2 = Math.floor(Math.random() * (10 - num1));
-      if (Math.floor(Math.random() * 2) === 1) {
-        // 50% の確率で、num1の10の位を10にする
+      let num1 = Math.floor(Math.random() * 9);
+      const num2 = Math.floor(Math.random() * (9 - num1)) + 1;
+      if (num1 === 0 || Math.floor(Math.random() * 2) === 1) {
+        // 左辺の1の位が0、または50% の確率でnum1の10の位を10にする
         num1 = num1 + 10;
       }
       document.getElementById("shiki").setAttribute("value", num1 + num2);

@@ -1,6 +1,10 @@
 "use strict";
 
 (function () {
+  const url = new URL(window.location.href);
+  const mode = url.searchParams.get("mode");
+  createMondai();
+
   // 解答時の効果音
   const okSound = new Audio("./sounds/ok.mp3");
   const ngSound = new Audio("./sounds/ng.mp3");
@@ -55,20 +59,33 @@
   }
 
   // 問題の作成
-  // くりあがりなし、かつ10の位の計算無し
-  // = かつ1の位の合計が9以下、かつ右辺と左辺の合計が19以下
   function createMondai() {
-    let num1 = Math.floor(Math.random() * 9);
-    const num2 = Math.floor(Math.random() * (9 - num1));
-    if (Math.floor(Math.random() * 2) === 1) {
-      // 50% の確率で、num1の10の位を10にする
-      num1 = num1 + 10;
+    if (mode === "t1") {
+      // たしざん(かんたん)
+      // くりあがりなし、かつ10の位の計算無し
+      // = 1の位の合計が9以下、かつ右辺と左辺の合計が19以下
+      let num1 = Math.floor(Math.random() * 9) + 1;
+      const num2 = Math.floor(Math.random() * (10 - num1));
+      if (Math.floor(Math.random() * 2) === 1) {
+        // 50% の確率で、num1の10の位を10にする
+        num1 = num1 + 10;
+      }
+      document.getElementById("shiki").setAttribute("value", num1 + num2);
+      document.getElementById("shiki").innerText = `${num1}+${num2}=`;
+    } else if (mode === "h1") {
+      // ひきざん(かんたん)
+      // くりさがりなし、かつ10の位の計算無し
+      // = 1の位の左辺が右辺と同じ、または大きい
+      let num1 = Math.floor(Math.random() * 9) + 1;
+      const num2 = Math.floor(Math.random() * num1) + 1;
+      if (Math.floor(Math.random() * 2) === 1) {
+        // 50% の確率で、num1の10の位を10にする
+        num1 = num1 + 10;
+      }
+      document.getElementById("shiki").setAttribute("value", num1 - num2);
+      document.getElementById("shiki").innerText = `${num1}-${num2}=`;
     }
-    document.getElementById("shiki").setAttribute("value", num1 + num2);
-    document.getElementById("shiki").innerText = `${num1}+${num2}=`;
   }
-
-  createMondai();
 
   // 処理を割当
   document.getElementById("finishButton").onclick = finish;

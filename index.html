@@ -1,122 +1,130 @@
 <html>
   <head>
     <title>たしざん</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-    body {
-       background-color: #f6c2c2;
-       cursor: pointer;
-       font-family: 'M PLUS 1p', sans-serif;
-    }
-     #container {
-       background-color: #fff;
-       width: 1000px;
-       height: 700px;
-       margin: auto;
-     }
-     #questionArea {
-       display: flex;
-       width: 950px;
-       height: 280px;
-       margin: auto;
-       margin-right: 10px;
-       text-align: center;
-     }
-     #answer {
-       margin: auto;
-       font-size: 180px;
-       width:340px;
-       height:200px;
-       border: 5px solid;
-       line-height:200px;
-     }
-     #shiki {
-       font-size: 150px;
-       width:500px;
-       height:200px;
-       margin: auto;
-       text-align: right;
-     }
-     #numButtonArea {
-       display: grid;
-       width: 630px;
-       grid-template-columns: 110px 110px 110px 110px 110px;
-       grid-template-rows: 110px 110px;
-       gap: 20px;
-       margin-right: auto;
-       margin-left: auto;
-     }
-     .numButton {
-       background-color: #f9fbba;
-       text-align: center;
-       vertical-align: auto;
-       font-size: 70px;
-       border-radius: 20px;
-       border: 2px solid;
-     }
-     #finishButton {
-       background-color: #d4edf4;
-       width: 400px;
-       text-align: center;
-       vertical-align: auto;
-       font-size: 70px;
-       border-radius: 20px;
-       border: 2px solid;
-       margin-top: 25px;
-       margin-bottom: 25px;
-       margin-right: auto;
-       margin-left: auto;
-     }
-     #skip {
-       background-color: #d4edf4;
-       text-align: center;
-       font-size: 30px;
-       border-radius: 10px;
-       border: 2px solid;
-       margin-left: 850px;
-       width: 100px;
-       height: 40px;
-       margin-top: -100px;
-     }
-     #hamanaru {
-       width: 180px;
-       height: 180px;
-       margin-left: -180px;
-       margin-top: 10px;
-     }
-     #resultMessage {
-       color: red;
-       width: 100%;
-       height: 20px;
-       font-size: 20px;
-       margin-top: -85px;
-     }
-     .effects {
-       display: none;
-     }
-     #retry {
-       background-color: #d4edf4;
-       text-align: center;
-       vertical-align: auto;
-       font-size: 30px;
-       border-radius: 10px;
-       border: 2px solid;
-       width: 80px;
-       height: 40px;
-       margin-top: 180px;
-       margin-left: -70px;
-     }
-     .buttons {
-       box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .5);
-     }
-　</style>
+          body {
+             background-color: #f6c2c2;
+             cursor: pointer;
+             font-family: 'M PLUS 1p', sans-serif;
+          }
+           #container {
+             background-color: #fff;
+             width: 1000px;
+             height: 700px;
+             margin: auto;
+           }
+           #questionArea {
+             display: flex;
+             width: 950px;
+             height: 280px;
+             margin: auto;
+             margin-right: 10px;
+             text-align: center;
+           }
+           #answer {
+             margin: auto;
+             font-size: 180px;
+             width:340px;
+             height:200px;
+             border: 5px solid;
+             line-height:200px;
+           }
+           #shiki {
+             font-size: 150px;
+             width:500px;
+             height:200px;
+             margin: auto;
+             text-align: right;
+           }
+           #numButtonArea {
+             display: grid;
+             width: 630px;
+             grid-template-columns: 110px 110px 110px 110px 110px;
+             grid-template-rows: 110px 110px;
+             gap: 20px;
+             margin-right: auto;
+             margin-left: auto;
+           }
+           .numButton {
+             background-color: #f9fbba;
+             text-align: center;
+             vertical-align: auto;
+             font-size: 70px;
+             border-radius: 20px;
+             border: 2px solid;
+           }
+           #finishButton {
+             background-color: #d4edf4;
+             width: 400px;
+             text-align: center;
+             vertical-align: auto;
+             font-size: 70px;
+             border-radius: 20px;
+             border: 2px solid;
+             margin-top: 25px;
+             margin-bottom: 25px;
+             margin-right: auto;
+             margin-left: auto;
+           }
+           #skip {
+             background-color: #d4edf4;
+             text-align: center;
+             font-size: 30px;
+             border-radius: 10px;
+             border: 2px solid;
+             margin-left: 850px;
+             width: 100px;
+             height: 40px;
+             margin-top: -100px;
+           }
+           #hamanaru {
+             width: 180px;
+             height: 180px;
+             margin-left: -180px;
+             margin-top: 10px;
+           }
+           #resultMessage {
+             color: red;
+             width: 100%;
+             height: 20px;
+             font-size: 20px;
+             margin-top: -85px;
+           }
+           .effects {
+             display: none;
+           }
+           #retry {
+             background-color: #d4edf4;
+             text-align: center;
+             vertical-align: auto;
+             font-size: 30px;
+             border-radius: 10px;
+             border: 2px solid;
+             width: 80px;
+             height: 40px;
+             margin-top: 180px;
+             margin-left: -70px;
+           }
+           .buttons {
+             box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .5);
+           }
+      　
+    </style>
   </head>
   <body>
     <div id="container">
       <div id="questionArea">
-        <span id="shiki" value="10">8+2=</span><div id="answer"><span id="resultMessage" class="effects"></span><span id="answerText">？</span></div>
+        <span id="shiki" value="10">8+2=</span>
+        <div id="answer">
+          <span id="resultMessage" class="effects"></span
+          ><span id="answerText">？</span>
+        </div>
         <span id="retry" class="buttons" onclick="retry()">けす</span>
         <img id="hamanaru" class="effects" />
       </div>
@@ -136,41 +144,47 @@
       <div id="skip" class="buttons" onclick="skip()">つぎ→</div>
     </div>
     <script>
-      const okSound = new Audio('ok.mp3');
-      const ngSound = new Audio('ng.mp3');
+      const okSound = new Audio("ok.mp3");
+      const ngSound = new Audio("ng.mp3");
 
       function writeNum(num) {
-      	const answer = document.getElementById("answerText");
+        const answer = document.getElementById("answerText");
         if (answer.innerText.length < 2) {
-          answer.innerText = answer.innerText.replace('？', '') + num;
+          answer.innerText = answer.innerText.replace("？", "") + num;
         }
       }
 
       function finish() {
-      	const answer = document.getElementById("answerText").innerText*1;
-      	const seikai = document.getElementById("shiki").getAttribute('value')*1;
-      	if (answer === seikai) {
-      	  document.getElementById("hamanaru").style.display = "flex";
-      	  document.getElementById("hamanaru").src = `./hanamaru${Math.floor(Math.random() * 2) + 1}.gif`;
-      	  okSound.play();
-      	} else {
-      	  const prefix = Math.abs(answer - seikai) === 1 ? 'おしい！' : 'ざんねん！';
-      	  document.getElementById("resultMessage").innerText = prefix + `せいかいは ${seikai} だよ！`;
-      	  document.getElementById("resultMessage").style.display = "inline-block";
-      	  ngSound.play();
-      	}
+        const answer = document.getElementById("answerText").innerText * 1;
+        const seikai =
+          document.getElementById("shiki").getAttribute("value") * 1;
+        if (answer === seikai) {
+          document.getElementById("hamanaru").style.display = "flex";
+          document.getElementById("hamanaru").src = `./hanamaru${
+            Math.floor(Math.random() * 2) + 1
+          }.gif`;
+          okSound.play();
+        } else {
+          const prefix =
+            Math.abs(answer - seikai) === 1 ? "おしい！" : "ざんねん！";
+          document.getElementById("resultMessage").innerText =
+            prefix + `せいかいは ${seikai} だよ！`;
+          document.getElementById("resultMessage").style.display =
+            "inline-block";
+          ngSound.play();
+        }
       }
       function retry() {
-      	document.getElementById("answerText").innerText = "？";
-      	syokika()
+        document.getElementById("answerText").innerText = "？";
+        syokika();
       }
       function skip() {
-      	document.getElementById("answerText").innerText = "？";
-      	createMondai();
-      	syokika()
+        document.getElementById("answerText").innerText = "？";
+        createMondai();
+        syokika();
       }
       function syokika() {
-      	const effects = document.getElementsByClassName("effects");
+        const effects = document.getElementsByClassName("effects");
         for (let i = 0; i < effects.length; i++) {
           effects[i].style.display = "none";
         }
@@ -180,17 +194,17 @@
       // くりあがりなし、かつ10の位の計算無し
       // = 右辺と左辺の合計が19以下、かつ1の位の合計が9以下
       function createMondai() {
-      	let num1 = Math.floor(Math.random() * 9);
-      	let num2 = Math.floor(Math.random() * (9 - num1));
-      	if (Math.floor(Math.random() * 2) === 1) {
-      	  // 50% の確率で、num1の10の位を10にする
-      	  num1 = num1 + 10;
-      	}
-      	document.getElementById("shiki").setAttribute('value', num1 + num2);
-      	document.getElementById("shiki").innerText = `${num1}+${num2}=`;
+        let num1 = Math.floor(Math.random() * 9);
+        let num2 = Math.floor(Math.random() * (9 - num1));
+        if (Math.floor(Math.random() * 2) === 1) {
+          // 50% の確率で、num1の10の位を10にする
+          num1 = num1 + 10;
+        }
+        document.getElementById("shiki").setAttribute("value", num1 + num2);
+        document.getElementById("shiki").innerText = `${num1}+${num2}=`;
       }
 
-      createMondai()
+      createMondai();
     </script>
   </body>
 </html>

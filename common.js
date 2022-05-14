@@ -1,8 +1,7 @@
 "use strict";
 
 (function () {
-  const url = new URL(window.location.href);
-  const mode = url.searchParams.get("mode");
+  const mode = new URL(window.location.href).searchParams.get("mode");
   createMondai();
 
   // 解答時の効果音
@@ -62,7 +61,7 @@
   function createMondai() {
     if (mode === "t1") {
       // たしざん(かんたん)
-      // くりあがりなし、かつ10の位の計算無し
+      // くりあがり、10の位の計算無し
       // = 1の位の合計が9以下、かつ右辺と左辺の合計が19以下
       let num1 = Math.floor(Math.random() * 9);
       const num2 = Math.floor(Math.random() * (9 - num1)) + 1;
@@ -72,9 +71,22 @@
       }
       document.getElementById("shiki").setAttribute("value", num1 + num2);
       document.getElementById("shiki").innerText = `${num1}+${num2}=`;
+    } else if (mode === "t2") {
+      // たしざん(むずかしい)
+      // くりあがり有り、10の位の計算無し
+      let num1 = randRange({ min: 2, max: 9 });
+      let num2 = randRange({ min: 11 - num1, max: 9 });
+      const rand = Math.floor(Math.random() * 3);
+      if (rand === 2) {
+        num1 += 10;
+      } else if (rand === 1) {
+        num2 += 10;
+      }
+      document.getElementById("shiki").setAttribute("value", num1 + num2);
+      document.getElementById("shiki").innerText = `${num1}+${num2}=`;
     } else if (mode === "h1") {
       // ひきざん(かんたん)
-      // くりさがりなし、かつ10の位の計算無し
+      // くりさがり、10の位の計算無し
       // = 1の位の左辺が右辺と同じ、または大きい
       let num1 = Math.floor(Math.random() * 9) + 1;
       const num2 = Math.floor(Math.random() * num1) + 1;
@@ -84,7 +96,21 @@
       }
       document.getElementById("shiki").setAttribute("value", num1 - num2);
       document.getElementById("shiki").innerText = `${num1}-${num2}=`;
+    } else if (mode === "h2") {
+      // ひきざん(むずかしい)
+      // くりさがり有り、10の位の計算とマイナス解無し。
+      const num2 = Math.floor(Math.random() * 9) + 1;
+      const num1 =
+        Math.floor(Math.random() * num2) +
+        10 +
+        Math.floor(Math.random() * 2) * 10;
+      document.getElementById("shiki").setAttribute("value", num1 - num2);
+      document.getElementById("shiki").innerText = `${num1}-${num2}=`;
     }
+  }
+
+  function randRange({ min, max }) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   // 処理を割当

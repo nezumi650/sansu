@@ -9,7 +9,7 @@ https://nezumi650.github.io/sansu/
 
 ⚠️操作中、効果音が鳴ります。
 
-![sample](https://user-images.githubusercontent.com/2949661/168206554-f6351fe0-d8de-41fd-8056-b8eb8d75d4ac.png)
+<img width="1015" alt="スクリーンショット 2022-05-14 17 28 29" src="https://user-images.githubusercontent.com/2949661/168417781-acfb5c11-2906-42a3-9806-7748ada43a62.png">
 
 ----
 

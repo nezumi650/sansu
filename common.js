@@ -1,12 +1,9 @@
 "use strict";
 
-(function () {
+(function() {
   const mode = new URL(window.location.href).searchParams.get("mode");
+  const level = new URL(window.location.href).searchParams.get("level") * 1;
   createMondai();
-
-  // 解答時の効果音
-  const okSound = new Audio("./sounds/ok.mp3");
-  const ngSound = new Audio("./sounds/ng.mp3");
 
   // 数字の入力
   function writeNum(num) {
@@ -20,18 +17,21 @@
   function finish() {
     const answer = document.getElementById("answerText").innerText * 1;
     const seikai = document.getElementById("shiki").getAttribute("value") * 1;
+    let audio;
     if (answer === seikai) {
-      document.getElementById("hamanaru").style.display = "flex";
-      document.getElementById("hamanaru").src = "./images/hanamaru.gif";
-      okSound.play();
+      const hanamaru = document.getElementById("hamanaru");
+      hanamaru.src = "./images/hanamaru.gif";
+      hanamaru.style.display = "flex";
+      audio = new Audio("./sounds/ok.mp3");
     } else {
+      const resultMessage = document.getElementById("resultMessage");
       const prefix =
         Math.abs(answer - seikai) === 1 ? "おしい！" : "ざんねん！";
-      document.getElementById("resultMessage").innerText =
-        prefix + `せいかいは ${seikai} だよ！`;
-      document.getElementById("resultMessage").style.display = "inline-block";
-      ngSound.play();
+      resultMessage.innerText = prefix + `せいかいは ${seikai} だよ！`;
+      resultMessage.style.display = "inline-block";
+      audio = new Audio("./sounds/ng.mp3");
     }
+    audio.play();
   }
 
   // 「けす」ボタンの操作
@@ -59,54 +59,69 @@
 
   // 問題の作成
   function createMondai() {
-    if (mode === "t1") {
-      // たしざん(かんたん)
-      // くりあがり、10の位の計算無し
-      // = 1の位の合計が9以下、かつ右辺と左辺の合計が19以下
-      let num1 = Math.floor(Math.random() * 9);
-      const num2 = Math.floor(Math.random() * (9 - num1)) + 1;
-      if (num1 === 0 || Math.floor(Math.random() * 2) === 1) {
-        // 左辺の1の位が0、または50% の確率でnum1の10の位を10にする
-        num1 = num1 + 10;
-      }
-      document.getElementById("shiki").setAttribute("value", num1 + num2);
-      document.getElementById("shiki").innerText = `${num1}+${num2}=`;
-    } else if (mode === "t2") {
-      // たしざん(むずかしい)
-      // くりあがり有り、10の位の計算無し
-      let num1 = randRange({ min: 2, max: 9 });
-      let num2 = randRange({ min: 11 - num1, max: 9 });
-      const rand = Math.floor(Math.random() * 3);
-      if (rand === 2) {
-        num1 += 10;
-      } else if (rand === 1) {
-        num2 += 10;
-      }
-      document.getElementById("shiki").setAttribute("value", num1 + num2);
-      document.getElementById("shiki").innerText = `${num1}+${num2}=`;
-    } else if (mode === "h1") {
-      // ひきざん(かんたん)
-      // くりさがり、10の位の計算無し
-      // = 1の位の左辺が右辺と同じ、または大きい
-      let num1 = Math.floor(Math.random() * 9) + 1;
-      const num2 = Math.floor(Math.random() * num1) + 1;
-      if (Math.floor(Math.random() * 2) === 1) {
-        // 50% の確率で、num1の10の位を10にする
-        num1 = num1 + 10;
-      }
-      document.getElementById("shiki").setAttribute("value", num1 - num2);
-      document.getElementById("shiki").innerText = `${num1}-${num2}=`;
-    } else if (mode === "h2") {
-      // ひきざん(むずかしい)
-      // くりさがり有り、10の位の計算とマイナス解無し。
-      const num2 = Math.floor(Math.random() * 9) + 1;
-      const num1 =
-        Math.floor(Math.random() * num2) +
-        10 +
-        Math.floor(Math.random() * 2) * 10;
-      document.getElementById("shiki").setAttribute("value", num1 - num2);
-      document.getElementById("shiki").innerText = `${num1}-${num2}=`;
+    let num1, // 式 左辺
+      num2, // 式 右辺
+      operator, // 式 演算子
+      answer = ""; // 正解
+    switch (mode) {
+      case "t":
+        // たしざん
+        if (level === 1) {
+          // くりあがり、10の位の計算無し
+          // = 1の位の合計が9以下、かつ右辺と左辺の合計が19以下
+          num1 = Math.floor(Math.random() * 9);
+          num2 = Math.floor(Math.random() * (9 - num1)) + 1;
+          if (num1 === 0 || Math.floor(Math.random() * 2) === 1) {
+            // 左辺の1の位が0、または50% の確率でnum1の10の位を10にする
+            num1 = num1 + 10;
+          }
+        } else if (level === 2) {
+          // くりあがり有り、10の位の計算無し
+          num1 = randRange({ min: 2, max: 9 });
+          num2 = randRange({ min: 11 - num1, max: 9 });
+          const rand = Math.floor(Math.random() * 3);
+          if (rand === 2) {
+            num1 += 10;
+          } else if (rand === 1) {
+            num2 += 10;
+          }
+        }
+        operator = "+";
+        answer = num1 + num2;
+        break;
+
+      case "h":
+        // ひきざん
+        if (level === 1) {
+          // くりさがり、10の位の計算無し
+          // = 1の位の左辺が右辺と同じ、または大きい
+          num1 = Math.floor(Math.random() * 9) + 1;
+          num2 = Math.floor(Math.random() * num1) + 1;
+          if (Math.floor(Math.random() * 2) === 1) {
+            // 50% の確率で、num1の10の位を10にする
+            num1 = num1 + 10;
+          }
+        } else if (level === 2) {
+          // くりさがり有り、10の位の計算とマイナス解無し。
+          num2 = Math.floor(Math.random() * 9) + 1;
+          num1 =
+            Math.floor(Math.random() * num2) +
+            10 +
+            Math.floor(Math.random() * 2) * 10;
+        }
+        operator = "-";
+        answer = num1 - num2;
+        break;
+
+      default:
+        // 旧URLへのアクセス
+        document.location = "sorry.html";
+        break;
     }
+
+    const shiki = document.getElementById("shiki");
+    shiki.setAttribute("value", answer);
+    shiki.innerText = `${num1 || ""}${operator || ""}${num2 || ""}=`;
   }
 
   function randRange({ min, max }) {
@@ -119,7 +134,7 @@
   document.getElementById("retry").onclick = retry;
   const numButtons = document.getElementsByClassName("numButtons");
   for (let i = 0; i < numButtons.length; i++) {
-    numButtons[i].onclick = function () {
+    numButtons[i].onclick = function() {
       writeNum(numButtons[i].innerText);
     };
   }

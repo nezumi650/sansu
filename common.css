@@ -104,12 +104,3 @@ body {
 .buttons {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .5);
 }
-
-
-#sorryMessage h1 {
-  padding-top: 30px;
-  font-size: 50px;
-}
-#sorryMessage {
-  text-align: center;
-}

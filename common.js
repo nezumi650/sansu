@@ -8,7 +8,7 @@
   // 数字の入力
   function writeNum(num) {
     const answer = document.getElementById("answerText");
-    if (answer.innerText.length < 2) {
+    if (answer.innerText.length < 3) {
       answer.innerText = answer.innerText.replace("？", "") + num;
     }
   }
@@ -73,7 +73,7 @@
           num2 = Math.floor(Math.random() * (9 - num1)) + 1;
           if (num1 === 0 || Math.floor(Math.random() * 2) === 1) {
             // 左辺の1の位が0、または50% の確率でnum1の10の位を10にする
-            num1 = num1 + 10;
+            num1 += 10;
           }
         } else if (level === 2) {
           // くりあがり有り、10の位の計算無し
@@ -85,6 +85,16 @@
           } else if (rand === 1) {
             num2 += 10;
           }
+        } else if (level === 3) {
+          // くりあがり、10の位の計算有り
+          num1 = randRange({ min: 2, max: 9 });
+          num2 = randRange({ min: 11 - num1, max: 9 });
+          num1 += randRange({ min: 1, max: 2 }) * 10;
+          num2 += randRange({ min: 1, max: 2 }) * 10;
+        } else if (level === 100) {
+          // ２桁の数字の計算
+          num1 = randRange({ min: 10, max: 99 });
+          num2 = randRange({ min: 10, max: 99 });
         }
         operator = "+";
         answer = num1 + num2;
@@ -108,6 +118,17 @@
             Math.floor(Math.random() * num2) +
             10 +
             Math.floor(Math.random() * 2) * 10;
+        } else if (level === 3) {
+          // くりさがり、10の位の計算有り。マイナス解無し。
+          num2 = Math.floor(Math.random() * 9) + 1;
+          num1 = Math.floor(Math.random() * num2);
+          // 常に左辺が右辺より大きくなる様に調整
+          num1 += randRange({ min: 2, max: 3 }) * 10;
+          num2 += randRange({ min: 0, max: 1 }) * 10;
+        } else if (level === 100) {
+          // ２桁の数字の計算。マイナス解無し。
+          num1 = randRange({ min: 20, max: 99 });
+          num2 = randRange({ min: 10, max: num1 });
         }
         operator = "-";
         answer = num1 - num2;
